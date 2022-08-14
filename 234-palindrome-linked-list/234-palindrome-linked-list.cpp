@@ -10,32 +10,43 @@
  */
 class Solution {
 public:
-    void insertathead(ListNode *&head,int value)
+    ListNode *reverselinklist(ListNode *&head)
     {
-        ListNode *n=new ListNode(value);
-        n->next=head;
-        head=n;
-    }
-    bool isPalindrome(ListNode* head) 
-    {
-        ListNode *temp=head;
-        ListNode *head1=NULL;
-        while(temp!=NULL)
+        if(head==NULL or head->next==NULL)
         {
-            insertathead(head1,temp->val);
-            temp=temp->next;
+            return head;
         }
-        while(head!=NULL and head1!=NULL)
+        ListNode *next_head=reverselinklist(head->next);
+        ListNode *c=head;
+        c->next->next=c;
+        c->next=NULL;
+        return next_head;
+    }
+    bool isPalindrome(ListNode* head)
+    {
+        if(head==NULL or head->next==NULL)
         {
-            if(head->val!=head1->val)
+            return true;
+        }
+        ListNode* slow=head;
+        ListNode* f=head;
+        while(f->next!=NULL and f->next->next!=NULL)
+        {
+            slow=slow->next;
+            f=f->next->next;
+        }
+        
+        slow->next=reverselinklist(slow->next);
+        slow=slow->next;
+        while(slow!=NULL)
+        {
+            if(head->val!=slow->val)
             {
                 return false;
             }
             head=head->next;
-            head1=head1->next;
+             slow=slow->next;
         }
         return true;
-        
-        
     }
 };
