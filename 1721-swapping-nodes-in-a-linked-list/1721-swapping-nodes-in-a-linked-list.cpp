@@ -30,10 +30,7 @@ public:
             slow=slow->next;
             fast=fast->next;
         }
-        int temp;
-        temp=slow->val;
-        slow->val=prev->val;
-        prev->val=temp;
+       swap(slow->val,prev->val);
      return head;
     }
 };
