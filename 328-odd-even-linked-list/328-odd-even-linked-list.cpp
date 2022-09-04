@@ -16,26 +16,26 @@ public:
         {
             return NULL;
         }
-        ListNode* oddhead=NULL,*evenhead=NULL,*first=NULL,*second=NULL,*third=NULL;
+        ListNode* oddhead=NULL,*evenhead=NULL,*c=NULL,*n=NULL,*p=NULL;
         int jump=0;
         oddhead=head;
         evenhead = head->next;
-        first=head;
-        while(first and first->next)
+        c=head;
+        while(c and c->next)
         {
-        second=first->next;
-            first->next=second->next;
+        n=c->next;
+            c->next=n->next;
             jump++;
-            third=first;
-            first=second;
+            p=c;
+            c=n;
         }
         if(jump%2==0)
         {
-            first->next=evenhead;
+            c->next=evenhead;
         }
         else
         {
-            third->next=evenhead;
+            p->next=evenhead;
         }
         return oddhead;
     }
